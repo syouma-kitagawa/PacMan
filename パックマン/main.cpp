@@ -1,20 +1,17 @@
 #include <windows.h>
 #include <mmsystem.h>
-#include <d3dx9.h>
+#include "Game.h"
+#include "DirectGraphics.h"
+#include "DirectInput.h"
+#include "Player.h"
+#include "CookieCreate.h"
+#include "Scene.h"
+#include "BackGround.h"
 
 #define TITLE 	TEXT("PacMan")
 #define D3DFVF_CUSTOMVERTEX (D3DFVF_XYZRHW | D3DFVF_DIFFUSE | D3DFVF_TEX1)
-#define DISPLAY_WIDTH 1280
-#define DISPLAY_HIGHT 720
-
-//Directx関係----------------------------
-IDirect3DDevice9*	  g_pD3Device;		//	Direct3Dのデバイス
-D3DPRESENT_PARAMETERS g_D3dPresentParameters;		//	パラメータ
-D3DDISPLAYMODE		  g_D3DdisplayMode;
-IDirect3D9*			  g_pDirect3D;		//	Direct3Dのインターフェイス
-										//---------------------------------------
-
-
+#define DISPLAY_WIDTH 600
+#define DISPLAY_HIGHT 680
 
 /**
 *メッセージ処理
@@ -67,32 +64,12 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance,
 		NULL
 	);
 	if (!hWnd) return 0;
-
-	//DirectX オブジェクトの生成
-	g_pDirect3D = Direct3DCreate9(
-		D3D_SDK_VERSION);
-
-	//Display Mode の設定
-	g_pDirect3D->GetAdapterDisplayMode(
-		D3DADAPTER_DEFAULT,
-		&g_D3DdisplayMode);
-
-	ZeroMemory(&g_D3dPresentParameters, sizeof(D3DPRESENT_PARAMETERS));
-	g_D3dPresentParameters.BackBufferFormat = g_D3DdisplayMode.Format;
-	g_D3dPresentParameters.BackBufferCount = 1;
-	g_D3dPresentParameters.SwapEffect = D3DSWAPEFFECT_DISCARD;
-	g_D3dPresentParameters.Windowed = TRUE;
-
-	//デバイスを作る
-	g_pDirect3D->CreateDevice(
-		D3DADAPTER_DEFAULT,
-		D3DDEVTYPE_HAL,
-		hWnd,
-		D3DCREATE_SOFTWARE_VERTEXPROCESSING,
-		&g_D3dPresentParameters, &g_pD3Device);
-
-
-
+	Game game;
+	DirectGraphics::CreateInstance(hWnd);
+	DirectInput::CreateDirectInput(hWnd);
+	DirectGraphics::pInstance->InitGraphicsPermeation("texture/PACMAN.png", game.m_pPlayer->GetPlayerTexture());
+	DirectGraphics::pInstance->InitGraphics("texture/BackGround.jpg", game.m_pScene->m_BackGround->GetBackGroundTexture());
+	DirectGraphics::pInstance->RenderInitialization();
 
 	DWORD SyncOld = timeGetTime();	//	システム時間を取得
 	DWORD SyncNow;
@@ -112,7 +89,9 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance,
 			SyncNow = timeGetTime();
 			if (SyncNow - SyncOld >= 1000 / 60) //	1秒間に60回この中に入るはず
 			{
+				game.RunGame();
 				SyncOld = SyncNow;
+
 			}
 		}
 	}
