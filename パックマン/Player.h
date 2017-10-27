@@ -3,12 +3,13 @@
 #include "CharObject.h"
 #include "DirectInput.h"
 #include "Game.h"
+#include "Collision.h"
 
 #define PACMAN_W 10
 #define PACMAN_H 10
 #define PACMAN_TU 0.0625
 #define PACMAN_TV 0.0625
-#define MOVESPEED 5.f
+#define MOVESPEED 2.f
 
 #define INNTIAL_POSX 50.f
 #define INNTIAL_POSY 50.f
@@ -21,6 +22,7 @@ public:
 	virtual void Update();
 
 	enum Direction {
+		UNKNOWN,
 		UP,
 		DOWN,
 		RIGHT,
@@ -38,7 +40,12 @@ public:
 	{
 		return &m_PlayerTexture;
 	}
+	D3DXVECTOR2 GetPos()
+	{
+		return m_Pos;
+	}
 private:
+	Collision* m_Collision;
 	int m_PlayerTexture;
 	Direction m_Directon;
 	float m_Tu;

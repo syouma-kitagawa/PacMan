@@ -3,13 +3,18 @@
 #include "Game.h"
 #include "DirectInput.h"
 
+
 Player::Player():m_Pos(INNTIAL_POSX, INNTIAL_POSY)
 {
-
+	m_Collision = new Collision();
+	m_Collision->SetPosition(m_Pos);
+	m_Collision->SetSize(D3DXVECTOR2(PACMAN_W * 2, PACMAN_H * 2));
+	m_Collision->SetCoolisionId(Collision::PLAYER);
 }
+
 Player::~Player()
 {
-
+	delete m_Collision;
 }
 
 void Player::Draw()
@@ -33,13 +38,13 @@ void Player::Draw()
 	switch (m_Directon)
 	{
 	case Player::UP:
-		DirectGraphics::pInstance->Direction_Up(DrawPacMan);
+		DirectGraphics::GetpInstance()->Direction_Up(DrawPacMan);
 		break;
 	case Player::DOWN:
-		DirectGraphics::pInstance->Direction_Down(DrawPacMan);
+		DirectGraphics::GetpInstance()->Direction_Down(DrawPacMan);
 		break;
 	case Player::RIGHT:
-		DirectGraphics::pInstance->Direction_Right(DrawPacMan);
+		DirectGraphics::GetpInstance()->Direction_Right(DrawPacMan);
 		break;
 	case Player::LEFT:
 		break;
@@ -48,7 +53,7 @@ void Player::Draw()
 	int remainder = Fcount % 15;
 	if (remainder <= 4)
 	{
-		DirectGraphics::pInstance->Render(&m_PlayerTexture, DrawPacMan);
+		DirectGraphics::GetpInstance()->Render(&m_PlayerTexture, DrawPacMan);
 	}
 	else if(remainder <= 9)
 	{
@@ -56,7 +61,7 @@ void Player::Draw()
 		DrawPacMan[1].tu += PACMAN_TU;
 		DrawPacMan[2].tu += PACMAN_TU;
 		DrawPacMan[3].tu += PACMAN_TU;
-		DirectGraphics::pInstance->Render(&m_PlayerTexture, DrawPacMan);
+		DirectGraphics::GetpInstance()->Render(&m_PlayerTexture, DrawPacMan);
 	}
 	else if(remainder <= 14)
 	{
@@ -64,7 +69,7 @@ void Player::Draw()
 		DrawPacMan[1].tu += PACMAN_TU*2;
 		DrawPacMan[2].tu += PACMAN_TU*2;
 		DrawPacMan[3].tu += PACMAN_TU*2;
-		DirectGraphics::pInstance->Render(&m_PlayerTexture, DrawPacMan);
+		DirectGraphics::GetpInstance()->Render(&m_PlayerTexture, DrawPacMan);
 	}
 	if (Fcount != 60)
 	{
@@ -116,6 +121,7 @@ void Player::Update()
 	{
 		m_Directon = RIGHT;	//‚à‚µD‚ª‰Ÿ‚³‚ê‚½‚ç‰E‚ÉŒü‚­
 	}
+	m_Collision->SetPosition(m_Pos);
 }
 
 

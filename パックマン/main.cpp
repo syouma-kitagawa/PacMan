@@ -67,9 +67,9 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance,
 	Game game;
 	DirectGraphics::CreateInstance(hWnd);
 	DirectInput::CreateDirectInput(hWnd);
-	DirectGraphics::pInstance->InitGraphicsPermeation("texture/PACMAN.png", game.m_pPlayer->GetPlayerTexture());
-	DirectGraphics::pInstance->InitGraphics("texture/BackGround.jpg", game.m_pScene->m_BackGround->GetBackGroundTexture());
-	DirectGraphics::pInstance->RenderInitialization();
+	DirectGraphics::GetpInstance()->InitGraphicsPermeation("texture/PACMAN.png", game.m_pPlayer->GetPlayerTexture());
+	DirectGraphics::GetpInstance()->InitGraphics("texture/BackGround.jpg", game.m_pScene->m_BackGround->GetBackGroundTexture());
+	DirectGraphics::GetpInstance()->RenderInitialization();
 
 	DWORD SyncOld = timeGetTime();	//	ƒVƒXƒeƒ€ŠÔ‚ğæ“¾
 	DWORD SyncNow;

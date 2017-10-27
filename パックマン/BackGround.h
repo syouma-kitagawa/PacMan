@@ -2,8 +2,8 @@
 #define BACKGROUND_H
 #include "SceneObject.h"
 
-#define BACKGROUND_W 560
-#define BACKGROUND_H 620
+#define TEXTUREBACKGROUND_W 560
+#define TEXTUREBACKGROUND_H 620
 
 
 class BackGround : public SceneObject{

@@ -2,11 +2,13 @@
 #include "Player.h"
 #include <stdio.h>
 
-DirectGraphics* DirectGraphics::pInstance;
+DirectGraphics* DirectGraphics::pInstance = NULL;
 
 void DirectGraphics::CreateInstance(HWND hWnd)
 {
-	pInstance = new DirectGraphics(hWnd);
+	if (pInstance == NULL) {
+		pInstance = new DirectGraphics(hWnd);
+	}
 }
 //2Dグラフィックス生成
 DirectGraphics::DirectGraphics(HWND hWnd)
@@ -79,7 +81,7 @@ void DirectGraphics::RenderInitialization()
 void DirectGraphics::StartRender()
 {
 	// 頂点情報の指定
-	m_pDirect3DDevice->SetFVF(D3DFVF_CUSTOMVERTEX);
+	m_pDirect3DDevice->SetFVF(D3DFVF_CUSTOMVERTEX); 
 
 	// 画面の消去
 	m_pDirect3DDevice->Clear(0, NULL, D3DCLEAR_TARGET, D3DCOLOR_XRGB(0x00, 0x00, 0x00), 1.0, 0);

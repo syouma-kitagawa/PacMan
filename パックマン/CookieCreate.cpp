@@ -3,8 +3,6 @@
 #include <fstream>
 Cookie::Cookie() 
 {
-	int tmp;
-
 	FILE *fp = NULL;
 	char FileName[] = "CSV/cookie.csv";
 
@@ -57,7 +55,7 @@ void Cookie::Draw()
 					{ 2*COOKIE_W + COOKIE_W*j*2 + offset_x, 2*COOKIE_H + COOKIE_H*i*2 + offset_y, 1.f, 1.f, 0xFFFFFFFF, 0.25, 0.0625 },
 					{ COOKIE_W*j*2 + offset_x, 2*COOKIE_H + COOKIE_H*i*2 + offset_y, 1.f, 1.f, 0xFFFFFFFF, 0.1875f,0.0625 }
 				};
-				DirectGraphics::pInstance->Render(&m_Cookie, CookieDraw);
+				DirectGraphics::GetpInstance()->Render(&m_Cookie, CookieDraw);
 			}
 		}
 	}

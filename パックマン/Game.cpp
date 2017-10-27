@@ -22,11 +22,11 @@ void Game::Update()
 
 void Game::Draw()
 {
-	DirectGraphics::pInstance->StartRender();
+	DirectGraphics::GetpInstance()->StartRender();
 	m_pScene->Draw();
 	m_pCookie->Draw();
 	m_pPlayer->Draw();
-	DirectGraphics::pInstance->EndRender();
+	DirectGraphics::GetpInstance()->EndRender();
 }
 void Game::RunGame() 
 {

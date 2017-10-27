@@ -14,6 +14,7 @@ public:
 	virtual void Draw();
 	virtual void Update();
 	void RunGame();
+	
 	//後でプライベートにする
 	Cookie* m_pCookie;
 	Player* m_pPlayer;

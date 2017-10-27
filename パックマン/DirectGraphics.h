@@ -15,8 +15,6 @@ struct CUSTOMVERTEX
 
 class DirectGraphics {
 public:
-	//2Dグラフィックス生成
-	DirectGraphics(HWND hWnd);
 	//2Dグラフィックス解放
 	virtual ~DirectGraphics();
 	static void CreateInstance(HWND hWnd);
@@ -33,7 +31,6 @@ public:
 	//第二引数画像を置く場所
 	void InitGraphics(char* fileps,int* Texture);
 	void InitGraphicsPermeation(char* fileps, int* Texture);
-	static DirectGraphics* pInstance;
 	//画像を上に方向転換
 	//引数上に向けたい画像のCUSTOMVERTEX
 	void Direction_Up(CUSTOMVERTEX Tmp[]);
@@ -46,8 +43,11 @@ public:
 	//画像を左に方向転換
 	//引数左に向けたい画像のCUSTOMVERTEX
 	void Direction_Left(CUSTOMVERTEX Tmp[]);
-	
+	static DirectGraphics* GetpInstance() { return pInstance; }
 private:
+	//2Dグラフィックス生成
+	DirectGraphics(HWND hWnd);
+	static DirectGraphics* pInstance;
 	LPDIRECT3D9			m_pDirect3D = NULL;		// DirectXオブジェクトのポインタ
 	LPDIRECT3DDEVICE9	m_pDirect3DDevice = NULL;	// DirectXデバイスのポインタ
 	std::vector<LPDIRECT3DTEXTURE9> m_pTexture;
