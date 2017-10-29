@@ -7,9 +7,9 @@
 class Collision {
 public:
 	enum CollisionId{
-		PLAYER,
-		COOKIE,
-		ENEMY
+		PLAYER = 0,
+		COOKIE = 1,
+		ENEMY = 2
 	};
 	Collision()
 	{

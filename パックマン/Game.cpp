@@ -3,6 +3,7 @@
 #include "Scene.h"
 #include "DirectGraphics.h"
 #include "CookieCreate.h"
+#include "CollisionManager.h"
 Game::Game()
 {
 	m_pPlayer = new Player();
@@ -18,6 +19,8 @@ Game::~Game()
 void Game::Update()
 {
 	m_pPlayer->Update();
+	CollisionManager::GetcollisionManager()->Update();
+	m_pCookie->UpDate();
 }
 
 void Game::Draw()

@@ -2,7 +2,7 @@
 #include "DirectGraphics.h"
 #include "Game.h"
 #include "DirectInput.h"
-
+#include "CollisionManager.h"
 
 Player::Player():m_Pos(INNTIAL_POSX, INNTIAL_POSY)
 {
@@ -10,6 +10,7 @@ Player::Player():m_Pos(INNTIAL_POSX, INNTIAL_POSY)
 	m_Collision->SetPosition(m_Pos);
 	m_Collision->SetSize(D3DXVECTOR2(PACMAN_W * 2, PACMAN_H * 2));
 	m_Collision->SetCoolisionId(Collision::PLAYER);
+	CollisionManager::GetcollisionManager()->AddCollision(m_Collision);
 }
 
 Player::~Player()
@@ -83,6 +84,9 @@ void Player::Draw()
 
 void Player::Update()
 {
+	if (m_Collision->GetOtherCollisionId() == Collision::COOKIE) {
+		m_Collision->GetOtherCollisionId();
+	}
 	DirectInput::pInstance->KeyCheck(&m_Key[KEY_W], DIK_W);
 	DirectInput::pInstance->KeyCheck(&m_Key[KEY_A], DIK_A);
 	DirectInput::pInstance->KeyCheck(&m_Key[KEY_S], DIK_S);

@@ -4,7 +4,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <memory.h>
-
+#include <vector>
+#include "Collision.h"
 #define COOKIE_WHIDE 26
 #define COOKIE_HEIGHT 29
 #define COOKIE_W 10
@@ -18,11 +19,14 @@ public:
 	~Cookie();
 	void CookieDateLoad();
 	void Draw();
+	void UpDate();
 	int* GetCookie()
 	{
 		return &m_Cookie;
 	}
+
 private:
+	std::vector<Collision*> m_Collision;
 	int m_Cookie;
 	int** m_CookieDate;
 };

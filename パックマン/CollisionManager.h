@@ -8,7 +8,7 @@
 class CollisionManager
 {
 public:
-	~CollisionManager();
+	~CollisionManager(){};
 	void AddCollision(Collision* pCollision)
 	{
 		m_pCollision.push_back(pCollision);
@@ -19,14 +19,15 @@ public:
 		for (int i = 0; i < m_pCollision.size(); i++) {
 			if (pCollision->GetId() == m_pCollision[i]->GetId()) {
 				m_pCollision.erase(m_pCollision.begin() + i);
+				break;
 			}
 		}
 	}
 	void Update();
-	static CollisionManager* GetcollisionManager() { return m_collisionManager; };
+	static CollisionManager* GetcollisionManager() { return &m_collisionManager; };
 private:
 	CollisionManager(){};
-	static CollisionManager* m_collisionManager;
+	static CollisionManager m_collisionManager;
 	std::vector<Collision*> m_pCollision;
 };
 
