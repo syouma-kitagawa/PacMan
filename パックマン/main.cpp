@@ -7,11 +7,14 @@
 #include "CookieCreate.h"
 #include "Scene.h"
 #include "BackGround.h"
+#include "Start.h"
 
 #define TITLE 	TEXT("PacMan")
 #define D3DFVF_CUSTOMVERTEX (D3DFVF_XYZRHW | D3DFVF_DIFFUSE | D3DFVF_TEX1)
 #define DISPLAY_WIDTH 600
 #define DISPLAY_HIGHT 680
+
+
 
 /**
 *メッセージ処理
@@ -68,7 +71,8 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance,
 	DirectGraphics::CreateInstance(hWnd);
 	DirectInput::CreateDirectInput(hWnd);
 	DirectGraphics::GetpInstance()->InitGraphicsPermeation("texture/PACMAN.png", game.m_pPlayer->GetPlayerTexture());
-	DirectGraphics::GetpInstance()->InitGraphics("texture/BackGround.jpg", game.m_pScene->m_BackGround->GetBackGroundTexture());
+	DirectGraphics::GetpInstance()->InitGraphics("texture/BackGround.jpg", game.m_pScene->GetBackGround()->GetBackGroundTexture());
+	DirectGraphics::GetpInstance()->InitGraphics("texture/Start.png", game.m_pScene->GetStart()->GetStartTexture());
 	DirectGraphics::GetpInstance()->RenderInitialization();
 
 	DWORD SyncOld = timeGetTime();	//	システム時間を取得
@@ -89,7 +93,8 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance,
 			SyncNow = timeGetTime();
 			if (SyncNow - SyncOld >= 1000 / 60) //	1秒間に60回この中に入るはず
 			{
-				game.RunGame();
+					game.RunGame();
+				
 				SyncOld = SyncNow;
 
 			}

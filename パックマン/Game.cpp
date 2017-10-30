@@ -4,6 +4,9 @@
 #include "DirectGraphics.h"
 #include "CookieCreate.h"
 #include "CollisionManager.h"
+
+static bool SceneFlg = false;
+
 Game::Game()
 {
 	m_pPlayer = new Player();
@@ -18,18 +21,31 @@ Game::~Game()
 }
 void Game::Update()
 {
-	m_pPlayer->Update();
-	CollisionManager::GetcollisionManager()->Update();
-	m_pCookie->UpDate();
+	DirectInput::pInstance->KeyCheck(&m_Key[KEY_SPACE], DIK_SPACE);
+	if (m_Key[KEY_SPACE] == KEY_PUSH){
+		SceneFlg = true;
+	}
+	if (SceneFlg) {
+		m_pPlayer->Update();
+		CollisionManager::GetcollisionManager()->Update();
+		m_pCookie->UpDate();
+	}
 }
 
 void Game::Draw()
 {
-	DirectGraphics::GetpInstance()->StartRender();
-	m_pScene->Draw();
-	m_pCookie->Draw();
-	m_pPlayer->Draw();
-	DirectGraphics::GetpInstance()->EndRender();
+	if (SceneFlg) {
+		DirectGraphics::GetpInstance()->StartRender();
+		m_pScene->Draw();
+		m_pCookie->Draw();
+		m_pPlayer->Draw();
+		DirectGraphics::GetpInstance()->EndRender();
+	}
+	else {
+		DirectGraphics::GetpInstance()->StartRender();
+		m_pScene->StartDraw();
+		DirectGraphics::GetpInstance()->EndRender();
+	}
 }
 void Game::RunGame() 
 {

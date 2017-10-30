@@ -37,6 +37,9 @@
     <Filter Include="ソース ファイル\Game">
       <UniqueIdentifier>{80b26039-a1e3-419d-b136-6c672aec71ee}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ソース ファイル\Scene\Start">
+      <UniqueIdentifier>{21e0f2c6-e98e-482e-9248-18d9ec61ea6c}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -72,6 +75,9 @@
     <ClCompile Include="Object.cpp">
       <Filter>ソース ファイル\Object</Filter>
     </ClCompile>
+    <ClCompile Include="Start.cpp">
+      <Filter>ソース ファイル\Scene\Start</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="DirectGraphics.h">
@@ -106,6 +112,9 @@
     </ClInclude>
     <ClInclude Include="CollisionManager.h">
       <Filter>ソース ファイル\Collision</Filter>
+    </ClInclude>
+    <ClInclude Include="Start.h">
+      <Filter>ソース ファイル\Scene\Start</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -2,6 +2,7 @@
 #define GAME_H
 
 #include "CharObject.h"
+#include "DirectInput.h"
 
 class Cookie;
 class Player;
@@ -19,6 +20,8 @@ public:
 	Cookie* m_pCookie;
 	Player* m_pPlayer;
 	Scene* m_pScene;
+private:
+	KEYSTATE m_Key[KEYMAX] = { KEY_OFF };
 };
 
 #endif // !GAME_H
